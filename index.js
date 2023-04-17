@@ -1,12 +1,9 @@
 import cosmos from "@azure/cosmos";
+import config from './config.js'
 
 const CosmosClient = cosmos.CosmosClient;
-const masterKey = "vES1Ej62YdDd98p79dritEkkD7Y7E5X2LAG1i30uq4PHqkHTfPU9Mdm8klOf9XvrBxGdeGNI0FTGACDbNXl91w==";
-const endpoint = "https://usertrackingnintex.documents.azure.com:443/";
-
+const { cosmosDatabase: {masterKey, endpoint, databaseId, containerId}} = config;
 const client = new CosmosClient({ endpoint, key: masterKey });
-const databaseId = "usertrackingnintexplugin";
-const containerId = "usertracking";
 
 async function queryItems1(idParam) {
     const { container, database } = await init();
@@ -23,7 +20,7 @@ async function queryItems1(idParam) {
         
       for (var queryResult of results) {
         let resultString = JSON.stringify(queryResult)
-        alert(`\tQuery returned ${resultString}\n`)
+        console.log(`\tQuery returned ${resultString}\n`)
       }
        
 }
