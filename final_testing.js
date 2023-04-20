@@ -49,5 +49,5 @@ export class UsagePlugin{
 }
 
 // registering the web component
-const elementName = 'usage-plugin';
+const elementName = 'maps-plugin';
 customElements.define(elementName, UsagePlugin);
