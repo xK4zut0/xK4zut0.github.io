@@ -1,8 +1,10 @@
 export class MapsPlugin{
   
   static properties = {
-    apiKey: {type: String},
-    endpoint: {type: String} 
+    masterKey: {type: String},
+    endpoint: {type: String},
+    databaseId: {type: String},
+    containerId: {type: String}
   }; 
 
   // return a promise for contract changes.
@@ -14,15 +16,26 @@ export class MapsPlugin{
       version: '1.2',
       pluginAuthor: 'Aljoscha Power',
       properties: {
-        apiKey: {
+        masterKey: {
             type: 'string',
-            title: 'API Key',
-            description: 'Please enter your Database API Key'
-        },
+            title: 'Database  Master-Key',
+            description: 'Please enter the Master-Key of the database'
+          },
+          
         endpoint: {
             type: 'string',
             title: 'Endpoint',
-            description: 'Type in your endpoint'
+            description: 'Please enter the endpoint of your azure database'
+        },
+        databaseId: {
+            title: 'Database-ID',
+            type: 'string',
+            description: 'Please enter the Id of your database'
+        },
+        containerId: {
+            title: 'Container ID',
+            type: 'string',
+            description: 'Please enter the Id of your container'
         }        
       }
     };
