@@ -4,7 +4,7 @@ export class FormUsagePlugin {
         masterKey: {type: String}, 
         endpoint: {type: String},
         databaseId: {type: String},
-        containerId: {type: String},        
+        containerId: {type: String}        
       }; 
 
       static getMetaConfig() {
