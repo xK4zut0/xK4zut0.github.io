@@ -1,4 +1,6 @@
-export class UsagePlugin{
+import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+
+export class UsagePlugin extends LitElement{
   
   static properties = {
     masterKey: {type: String},
@@ -44,6 +46,13 @@ export class UsagePlugin{
   constructor() {
     super();
     
+  }
+
+  render() {        
+
+    
+    return html`<p>Hello World<p/>`;     
+
   }
   
 }
