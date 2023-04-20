@@ -58,5 +58,5 @@ export class UsagePlugin extends LitElement{
 }
 
 // registering the web component
-const elementName = 'mediaplayer-plugin';
+const elementName = 'formusage-plugin';
 customElements.define(elementName, UsagePlugin);
