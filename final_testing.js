@@ -58,5 +58,5 @@ export class UsagePlugin extends LitElement{
 }
 
 // registering the web component
-const elementName = 'dataone-custom-textfield';
+const elementName = 'mediaplayer-plugin';
 customElements.define(elementName, UsagePlugin);
