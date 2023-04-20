@@ -58,5 +58,5 @@ export class UsagePlugin extends LitElement{
 }
 
 // registering the web component
-const elementName = 'maps-plugin';
+const elementName = 'dataone-custom-textfield';
 customElements.define(elementName, UsagePlugin);
