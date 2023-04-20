@@ -15,7 +15,7 @@ export class UsagePlugin extends LitElement{
       controlName: 'User Tracking',
       fallbackDisableSubmit: false,
       groupName: 'Tracking',
-      version: '1.2',
+      version: '1.0.0',
       pluginAuthor: 'Aljoscha Power',
       properties: {
         masterKey: {
