@@ -1,12 +1,7 @@
 export class MapsPlugin{
   
   static properties = {
-    apiKey: {type: String}, 
-    FormattedAdress: {type: String},
-    maptype: {type: String},
-    long: {type: String}, 
-    zoom: {type: String}
-    
+    apiKey: {type: String}  
   }; 
 
   // return a promise for contract changes.
@@ -22,32 +17,7 @@ export class MapsPlugin{
           type: 'string',
           title: 'API Key',
           description: 'Please enter your Google API Key'
-        },
-        
-        FormattedAdress: {
-          type: 'string',
-          title: 'Formatted Adress',
-          description: 'Please add from Adress Control the formatted Adress'
-        },
-        maptype: {
-          title: 'Map Type',
-          type: 'string',
-        	enum: ['roadmap', 'satellite'],
-          showAsRadio: false,
-          verticalLayout: true,
-          defaultValue: 'roadmap',
-          description: 'Choose your Map Type: roadmap and satellite'
-        },
-        zoom: {
-          title: 'Zoom',
-          type: 'string',
-        	enum: ['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','21'],
-          showAsRadio: false,
-          verticalLayout: true,
-          defaultValue: '11',
-          description: 'Values from 0 (the whole world) to 21 (individual buildings). The upper limit may vary depending on the map data for the selected location.'
-        }   
-        
+        }         
       }
     };
   }
