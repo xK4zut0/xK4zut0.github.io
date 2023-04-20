@@ -1,23 +1,29 @@
 export class MapsPlugin{
   
   static properties = {
-    apiKey: {type: String}  
+    apiKey: {type: String},
+    endpoint: {type: String} 
   }; 
 
   // return a promise for contract changes.
   static getMetaConfig() {
     return {
-      controlName: 'Maps Canvas',
+      controlName: 'User Tracking',
       fallbackDisableSubmit: false,
-      groupName: 'Google Maps',
+      groupName: 'Tracking',
       version: '1.2',
-      pluginAuthor: 'Sven Berling',
+      pluginAuthor: 'Aljoscha Power',
       properties: {
         apiKey: {
-          type: 'string',
-          title: 'API Key',
-          description: 'Please enter your Google API Key'
-        }         
+            type: 'string',
+            title: 'API Key',
+            description: 'Please enter your Database API Key'
+        },
+        endpoint: {
+            type: 'string',
+            title: 'Endpoint',
+            description: 'Type in your endpoint'
+        }        
       }
     };
   }
