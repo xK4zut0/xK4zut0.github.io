@@ -1,4 +1,4 @@
-export class MapsPlugin{
+export class UsagePlugin{
   
   static properties = {
     masterKey: {type: String},
@@ -49,5 +49,5 @@ export class MapsPlugin{
 }
 
 // registering the web component
-const elementName = 'maps-plugin';
-customElements.define(elementName, MapsPlugin);
+const elementName = 'usage-plugin';
+customElements.define(elementName, UsagePlugin);
