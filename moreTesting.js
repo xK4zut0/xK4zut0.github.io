@@ -14,7 +14,7 @@ export class UsagePlugin {
     return {
       controlName: 'Usage Tracker',
       fallbackDisableSubmit: false,
-      groupName: 'Google Maps',
+      groupName: 'Benutzunganalyse',
       version: '1.2',
       pluginAuthor: 'Aljoscha Power',
       properties: {
@@ -47,5 +47,5 @@ export class UsagePlugin {
 }
 
 // registering the web component
-const elementName = 'example-plugin';
+const elementName = 'dataone-plugin';
 customElements.define(elementName, UsagePlugin);
