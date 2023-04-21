@@ -1,4 +1,5 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+import { registerPlugin } from '@nintex/nwc-sdk';
 
 // define the component
 export class UsagePlugin extends LitElement{
@@ -63,4 +64,5 @@ export class UsagePlugin extends LitElement{
   
   // registering the web component
   const elementName = 'pluggy';
-  customElements.define(elementName, UsagePlugin);
+  const metaConfig = UsagePlugin.getMetaConfig();
+  registerPlugin(metaConfig, elementName, UsagePlugin);
