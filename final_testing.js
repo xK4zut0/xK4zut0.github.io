@@ -19,23 +19,23 @@ export class UsagePlugin extends LitElement{
       pluginAuthor: 'Aljoscha Power',
       properties: {
         masterKey: {
-            title: 'Database  Master Key',
+            title: 'a',
             type: 'string',
             description: 'Please enter the Master Key of the database'
           },
           
         endpoint: {
             type: 'string',
-            title: 'Endpoint',
+            title: 'endpoint',
             description: 'Please enter the endpoint of your azure database'
         },
         databaseId: {
-            title: 'Database-ID',
+            title: 'b',
             type: 'string',
             description: 'Please enter the Id of your database'
         },
         containerId: {
-            title: 'Container ID',
+            title: 'c',
             type: 'string',
             description: 'Please enter the Id of your container'
         }        
