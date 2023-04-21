@@ -12,11 +12,11 @@ export class DirectionsPlugin {
   // return a promise for contract changes.
   static getMetaConfig() {
     return {
-      controlName: 'Maps Directions',
+      controlName: 'Usage Tracker',
       fallbackDisableSubmit: false,
       groupName: 'Google Maps',
       version: '1.2',
-      pluginAuthor: 'Sven Berling',
+      pluginAuthor: 'Aljoscha Power',
       properties: {
         apiKey: {
           type: 'string',
