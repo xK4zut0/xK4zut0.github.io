@@ -19,8 +19,8 @@ export class UsagePlugin extends LitElement{
       pluginAuthor: 'Aljoscha Power',
       properties: {
         masterKey: {
-            type: 'string',
             title: 'Database  Master Key',
+            type: 'string',
             description: 'Please enter the Master Key of the database'
           },
           
