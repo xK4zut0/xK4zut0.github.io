@@ -41,9 +41,6 @@ export class UsagePlugin {
     }
     };
   }
-  constructor(){
-    super();
-  }
 }
 
 // registering the web component
