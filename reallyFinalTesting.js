@@ -1,5 +1,7 @@
+import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+
 // define the component
-export class UsagePlugin {
+export class UsagePlugin extends LitElement{
   
     static properties = {
       apiKey: {type: String},
@@ -41,8 +43,24 @@ export class UsagePlugin {
       }
       };
     }
+
+    async something(){
+        console.log("hi");
+    }
+
+    constructor(){
+        super();
+
+    }
+
+    render() {        
+
+    
+        return html`<p>Hello World<p/>`;     
+    
+      }
   }
   
   // registering the web component
-  const elementName = 'example-plugin';
+  const elementName = 'pluggy';
   customElements.define(elementName, UsagePlugin);
