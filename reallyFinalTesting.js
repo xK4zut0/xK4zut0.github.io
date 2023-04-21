@@ -44,5 +44,5 @@ export class UsagePlugin {
   }
   
   // registering the web component
-  const elementName = 'dataone-plugin';
+  const elementName = 'example-plugin';
   customElements.define(elementName, UsagePlugin);
