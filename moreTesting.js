@@ -1,5 +1,5 @@
 // define the component
-export class DirectionsPlugin {
+export class UsagePlugin {
   
   static properties = {
     apiKey: {type: String},
@@ -48,4 +48,4 @@ export class DirectionsPlugin {
 
 // registering the web component
 const elementName = 'example-plugin';
-customElements.define(elementName, DirectionsPlugin);
+customElements.define(elementName, UsagePlugin);
