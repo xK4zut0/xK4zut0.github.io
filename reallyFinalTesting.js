@@ -61,4 +61,4 @@ export class UsagePlugin extends LitElement{
       }
   }
   
-  customElements.define('MyPlugin', UsagePlugin);
+  customElements.define('myplugin', UsagePlugin);
