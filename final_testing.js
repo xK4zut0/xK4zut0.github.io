@@ -3,7 +3,7 @@ import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-a
 export class UsagePlugin extends LitElement{
   
   static properties = {
-    masterKey: {type: String},
+    masterKey: {type: String},  
     endpoint: {type: String},
     databaseId: {type: String},
     containerId: {type: String}
@@ -20,8 +20,8 @@ export class UsagePlugin extends LitElement{
       properties: {
         masterKey: {
             type: 'string',
-            title: 'Database  Master-Key',
-            description: 'Please enter the Master-Key of the database'
+            title: 'Database  Master Key',
+            description: 'Please enter the Master Key of the database'
           },
           
         endpoint: {
