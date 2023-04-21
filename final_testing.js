@@ -3,7 +3,7 @@ import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-a
 export class UsagePlugin extends LitElement{
   
   static properties = {
-    masterKey: {type: String},  
+    apiKey: {type: String},  
     endpoint: {type: String},
     databaseId: {type: String},
     containerId: {type: String}
@@ -15,10 +15,10 @@ export class UsagePlugin extends LitElement{
       controlName: 'User Tracking',
       fallbackDisableSubmit: false,
       groupName: 'Tracking',
-      version: '1.0.0',
+      version: '1.2',
       pluginAuthor: 'Aljoscha Power',
       properties: {
-        masterKey: {
+        apiKey: {
             title: 'a',
             type: 'string',
             description: 'Please enter the Master Key of the database'

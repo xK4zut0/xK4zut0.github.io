@@ -2,7 +2,10 @@
 export class DirectionsPlugin {
   
   static properties = {
-    apiKey: {type: String}
+    apiKey: {type: String},
+    endpoint: {type: String},
+    databaseId: {type: String},
+    containerId: {type: String}
     
   }; 
  
@@ -19,7 +22,22 @@ export class DirectionsPlugin {
           type: 'string',
           title: 'API Key',
           description: 'Please enter your Google API Key'
-        }   
+        },  
+        endpoint: {
+            type: 'string',
+            title: 'endpoint',
+            description: 'Please enter the endpoint of your azure database'
+        },
+        databaseId: {
+            title: 'b',
+            type: 'string',
+            description: 'Please enter the Id of your database'
+        },
+        containerId: {
+            title: 'c',
+            type: 'string',
+            description: 'Please enter the Id of your container'
+        }  
     }
     };
   }
