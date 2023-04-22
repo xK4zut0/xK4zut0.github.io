@@ -12,7 +12,7 @@ export class UsagePlugin extends LitElement{
     }; 
    
     // return a promise for contract changes.
-    static getMetaConfig() {
+    static async getMetaConfig() {
       return {
         controlName: 'Usage Tracker',
         fallbackDisableSubmit: false,
