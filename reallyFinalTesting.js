@@ -1,7 +1,7 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
 // define the component
-export default class UsagePlugin extends LitElement{
+export default class UsagePlugin extends LitElement {
   
     static properties = {
       apiKey: {type: String},
@@ -51,7 +51,6 @@ export default class UsagePlugin extends LitElement{
     constructor(){
         super();
         this.something();
-        this.getMetaConfig();
     }
 
     render() {        
@@ -61,5 +60,6 @@ export default class UsagePlugin extends LitElement{
     
       }
   }
-  
-  customElements.define('dataone-plugin', UsagePlugin);
+
+  const elementName = "dataone-plugin"
+  customElements.define(elementName, UsagePlugin);
