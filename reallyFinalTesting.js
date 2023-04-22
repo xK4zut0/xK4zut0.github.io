@@ -51,6 +51,7 @@ export default class UsagePlugin extends LitElement{
     constructor(){
         super();
         this.something();
+        this.getMetaConfig();
     }
 
     render() {        
@@ -61,4 +62,4 @@ export default class UsagePlugin extends LitElement{
       }
   }
   
-  customElements.define('dataone-plugin', getMetaConfig(), UsagePlugin);
+  customElements.define('dataone-plugin', UsagePlugin);
