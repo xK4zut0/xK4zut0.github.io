@@ -1,7 +1,7 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
 // define the component
-export class UsagePlugin extends LitElement{
+export default class UsagePlugin extends LitElement{
   
     static properties = {
       apiKey: {type: String},
@@ -12,7 +12,7 @@ export class UsagePlugin extends LitElement{
     }; 
    
     // return a promise for contract changes.
-    static async getMetaConfig() {
+    static getMetaConfig() {
       return {
         controlName: 'Usage Tracker',
         fallbackDisableSubmit: false,
@@ -61,4 +61,4 @@ export class UsagePlugin extends LitElement{
       }
   }
   
-  customElements.define('myplugin', UsagePlugin);
+  customElements.define('dataone-plugin', getMetaConfig(), UsagePlugin);
