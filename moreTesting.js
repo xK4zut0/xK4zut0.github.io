@@ -2,7 +2,7 @@ import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-a
 
 
 // define the component
-export class MediaPlayerPlugIn extends LitElement {
+export class TestPlugIn extends LitElement {
   
   static properties = {
     apiKey: {type: String},
@@ -84,5 +84,5 @@ export class MediaPlayerPlugIn extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-example-plugin';
-customElements.define(elementName, MediaPlayerPlugIn);
+const elementName = 'dataone-usagetracker-plugin';
+customElements.define(elementName, TestPlugIn);
