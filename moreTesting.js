@@ -43,8 +43,6 @@ export class TestPlugIn extends LitElement {
 
 
   checkAdress() {
-     
-     if(this.videosrc) {
          
       
       return html`
@@ -53,13 +51,6 @@ export class TestPlugIn extends LitElement {
             <p>Sample<p/>
 
       `;
-    
-    }
-    else {      
-      return html`
-        <p>Bitte geben Sie ein Video ein / Please enter a source </p>  
-      `;   
-    }
   }     
   
 
