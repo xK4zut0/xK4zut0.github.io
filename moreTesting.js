@@ -165,7 +165,7 @@ export class TestPlugIn extends LitElement {
   
 
   render() {        
-      
+
     return html`       
            ${this.manager()}      
     `;     
@@ -175,5 +175,5 @@ export class TestPlugIn extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-usagetracker-plugin';
+const elementName = 'dataone-usagetrackerV2-plugin';
 customElements.define(elementName, TestPlugIn);
