@@ -1,4 +1,5 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+import cosmos from "@azure/cosmos";
 
 
 // define the component
@@ -62,7 +63,7 @@ export class TestPlugIn extends LitElement {
   }
 
   async init() {
-    const { database } = await client.databases.createIfNotExists({ id: databaseId });
+    const { database } = await this.client.databases.createIfNotExists({ id: databaseId });
     const { container } = await database.containers.createIfNotExists({ id: containerId });
     return { database, container };
   }
@@ -102,7 +103,7 @@ export class TestPlugIn extends LitElement {
     ]
   };
 
-    const { resources: results } = await client
+    const { resources: results } = await this.client
     .database(databaseId)
     .container(containerId)
     .items.query(querySpec)
@@ -158,8 +159,9 @@ export class TestPlugIn extends LitElement {
   
   constructor() {
     super();
-    this.manager(); 
-    
+    this.manager();
+     const CosmosClient = cosmos.CosmosClient;
+     this.client = new CosmosClient({ endpoint, key: apiKey });
   }
 
   
