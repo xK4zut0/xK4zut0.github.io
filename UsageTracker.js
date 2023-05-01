@@ -3,7 +3,7 @@ import cosmos from "@azure/cosmos";
 
 
 // define the component
-export class TestPlugIn extends LitElement {
+export class TrackingPlugIn extends LitElement {
   
   static properties = {
     apiKey: {type: String},
@@ -177,5 +177,5 @@ export class TestPlugIn extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-usagetracker-v4-plugin';
-customElements.define(elementName, TestPlugIn);
+const elementName = 'dataone-formsuser-tracking-plugin';
+customElements.define(elementName, TrackingPlugIn);
