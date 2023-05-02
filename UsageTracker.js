@@ -1,5 +1,5 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
-import cosmos from "@azure/cosmos";
+//import cosmos from "@azure/cosmos";
 
 
 // define the component
