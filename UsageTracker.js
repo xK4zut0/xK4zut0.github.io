@@ -51,14 +51,8 @@ export class TestPlugIn extends LitElement {
         current_user: {
           title: 'user',
           type: 'string'
-        },
-        value: {
-          title: 'Aktueller Benutzer',
-          type: 'string',
-          isValueField: true, 
-        }            
-      },
-      events: ["ntx-value-change"],
+        }           
+      }
     };
   }
 
@@ -140,8 +134,6 @@ export class TestPlugIn extends LitElement {
         if (form.formID == current_formId) {
           formUser = form.user;
         }
-        const event = new CustomEvent('ntx-value-change', formUser);
-        this.dispatchEvent(event);
       } else {
         addFormToCosmosDB(container, queryResults);
       }
