@@ -159,9 +159,9 @@ export class TestPlugIn extends LitElement {
   
   constructor() {
     super();
+    const CosmosClient = cosmos.CosmosClient;
+    this.client = new CosmosClient({ endpoint, key: apiKey });
     this.manager();
-     const CosmosClient = cosmos.CosmosClient;
-     this.client = new CosmosClient({ endpoint, key: apiKey });
   }
 
   
