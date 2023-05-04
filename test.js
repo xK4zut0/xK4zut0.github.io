@@ -94,6 +94,6 @@ class TestPlugin extends LitElement {
     }
     
     render() {
-        return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
+        return html `<p>Dieser User arbeitet gerade auf dem Formular</p>`;
     }
 }
