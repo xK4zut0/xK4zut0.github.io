@@ -2,8 +2,8 @@ import cosmos from "@azure/cosmos";
 import config from './config.js';
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
-// define the component
-export class TestPlugin extends LitElement {
+@customElement('test-plugin')
+class TestPlugin extends LitElement {
     
     static userOnForm = "No User";
     static current_formId = 'abcd3';
@@ -97,7 +97,3 @@ export class TestPlugin extends LitElement {
         return html `<pre>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</pre>`;
     }
 }
-
-// registering the web component
-const elementName = 'test-plugin';
-customElements.define(elementName, TestPlugin);
