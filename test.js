@@ -2,8 +2,7 @@ import cosmos from "@azure/cosmos";
 import config from './config.js';
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
-@customElement('test-plugin')
-class TestPlugin extends LitElement {
+export class TestPlugin extends LitElement {
     
     static userOnForm = "No User";
     static current_formId = 'abcd3';
@@ -96,3 +95,5 @@ class TestPlugin extends LitElement {
         return html `<p>Dieser User arbeitet gerade auf dem Formular</p>`;
     }
 }
+
+customElements.define('test-plugin', TestPlugin);
