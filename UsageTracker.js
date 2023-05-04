@@ -1,65 +1,22 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
-//import cosmos from "@azure/cosmos";
+import cosmos, { CosmosClient } from "@azure/cosmos";
+import config from './config.js'
 
+export class TestPlugin extends LitElement {
 
-// define the component
-export class TestPlugIn extends LitElement {
-  
-  static properties = {
-    apiKey: {type: String},
-    endpoint: {type: String},
-    databaseId: {type: String},
-    containerId: {type: String},
-    current_workflowid: {type: String},
-    current_formId: {type: String},
-    current_user: {type: String}
-  };
-  
-  // return a promise for contract changes.
-  static getMetaConfig() {
-    return {
-      controlName: 'Usage Tracker',
-      fallbackDisableSubmit: false,
-      groupName: 'Useractivity',
-      version: '1.2',
-      properties: {
-        apiKey: {
-          type: 'string',
-          title: 'API Key',
-          description: 'Api key to database'
-        },       
-        endpoint: {
-          title: 'endpoint',
-          type: 'string'
-        },  
-        databaseId: {
-            title: 'databaseId',
-            type: 'string'
-        },
-        containerId: {
-            title: 'containerId',
-            type: 'string'
-        },
-        current_workflowid: {
-          title: 'workflowId',
-          type: 'string'
-        },
-        current_formId: {
-          title: 'formId',
-          type: 'string'
-        },
-        current_user: {
-          title: 'user',
-          type: 'string'
-        }           
-      }
-    };
-  }
+  static formUser = "No User";
+  static current_formId = 'abcd1';
+  static current_workflowid = 'abc1';
+  static current_user = 'aj';
 
   async init() {
-    const { database } = await this.client.databases.createIfNotExists({ id: databaseId });
+    const CosmosClient = cosmos.CosmosClient;
+    const { cosmosDatabase: {masterKey, endpoint, databaseId, containerId}} = config;
+    const client = new CosmosClient({ endpoint, key: masterKey });
+    const { database } = await client.databases.createIfNotExists({ id: databaseId });
     const { container } = await database.containers.createIfNotExists({ id: containerId });
-    return { database, container };
+
+    return { database, container, client, databaseId, containerId};
   }
 
   async addFormToCosmosDB(container, resources) {
@@ -88,18 +45,18 @@ export class TestPlugIn extends LitElement {
     console.log("Neues Dokument erstellt:", createdDoc);
   }
 
-  async queryDatabase(database, container){
+  async queryDatabase(database, container, client, databaseId, containerId){
 
   const querySpec = {
     query: "SELECT * FROM c WHERE c.id = @id ",
     parameters: [
-      { name: "@id", value: current_workflowid }
+      { name: "@id", value: TestPlugin.current_workflowid }
     ]
   };
 
     const { resources: results } = await this.client
-    .database(databaseId)
-    .container(containerId)
+    .database()
+    .container()
     .items.query(querySpec)
     .fetchAll()
     
@@ -122,7 +79,6 @@ export class TestPlugIn extends LitElement {
 
 
   async manager(idParam) {
-    var formUser = "";
     const{database, container} = await init();
     const queryResults = await queryDatabase(database, container);
 
@@ -134,6 +90,8 @@ export class TestPlugIn extends LitElement {
         if (form.formID == current_formId) {
           formUser = form.user;
         }
+        const event = new CustomEvent('ntx-value-change', formUser);
+        this.dispatchEvent(event);
       } else {
         addFormToCosmosDB(container, queryResults);
       }
@@ -141,19 +99,12 @@ export class TestPlugIn extends LitElement {
         addDocumentToDb(container);
     }
     
-    return html`
-                
-            <div class="plyr__video-embed" id="player">
-            <p>${formUser}<p/>
-
-      `;
+    return formUser;
   } 
   
   constructor() {
     super();
     this.manager();
-     const CosmosClient = cosmos.CosmosClient;
-     this.client = new CosmosClient({ endpoint, key: apiKey });
   }
 
   
@@ -169,5 +120,5 @@ export class TestPlugIn extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-test-plugin';
-customElements.define(elementName, TestPlugIn);
+const elementName = 'dataone-usagetrackerv3-plugin';
+customElements.define(elementName, TestPlugin);

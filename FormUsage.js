@@ -1,10 +1,11 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
-import cosmos from "@azure/cosmos";
+import cosmos, { CosmosClient } from "@azure/cosmos";
 
 
 // define the component
-export class TestPlugIn extends LitElement {
-  
+export class TestPlugin extends LitElement {
+  static formUser = "No User";
+  static client = new CosmosClient();
   static properties = {
     apiKey: {type: String},
     endpoint: {type: String},
@@ -63,6 +64,8 @@ export class TestPlugIn extends LitElement {
   }
 
   async init() {
+    const CosmosClient = cosmos.CosmosClient;
+    client = new CosmosClient({ endpoint, key: apiKey });
     const { database } = await this.client.databases.createIfNotExists({ id: databaseId });
     const { container } = await database.containers.createIfNotExists({ id: containerId });
     return { database, container };
@@ -128,7 +131,6 @@ export class TestPlugIn extends LitElement {
 
 
   async manager(idParam) {
-    var formUser = "";
     const{database, container} = await init();
     const queryResults = await queryDatabase(database, container);
 
@@ -149,18 +151,11 @@ export class TestPlugIn extends LitElement {
         addDocumentToDb(container);
     }
     
-    return html`
-                
-            <div class="plyr__video-embed" id="player">
-            <p>${formUser}<p/>
-
-      `;
+    return formUser;
   } 
   
   constructor() {
     super();
-    const CosmosClient = cosmos.CosmosClient;
-    this.client = new CosmosClient({ endpoint, key: apiKey });
     this.manager();
   }
 
@@ -178,4 +173,4 @@ export class TestPlugIn extends LitElement {
 
 // registering the web component
 const elementName = 'dataone-usagetrackerv3-plugin';
-customElements.define(elementName, TestPlugIn);
+customElements.define(elementName, TestPlugin);
