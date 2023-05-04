@@ -1,4 +1,4 @@
-import cosmos from "./node_modules/@azure/cosmos";
+import cosmos from 'https://cdn.jsdelivr.net/npm/@azure/cosmos@3.17.3/dist/index.min.js';
 import config from './config.js';
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
