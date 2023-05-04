@@ -3,7 +3,7 @@ import config from './config.js';
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
 export class TestPlugin extends LitElement {
-    
+
     static userOnForm = "No User";
     static current_formId = 'abcd3';
     static current_workflowid = 'abc4';
@@ -45,7 +45,6 @@ export class TestPlugin extends LitElement {
         };
         doc.forms.push(newForm);
         const { resource: updatedDoc } = await container.items.upsert(doc);
-        console.log("Dokument aktualisiert:", updatedDoc);
     }
 
     async  addDocumentToDb(container){
@@ -59,7 +58,6 @@ export class TestPlugin extends LitElement {
         ]
         };
         const { resource: createdDoc } = await container.items.create(newDocument);
-        console.log("Neues Dokument erstellt:", createdDoc);
     }
 
  
@@ -83,16 +81,15 @@ export class TestPlugin extends LitElement {
         } else {
             this.addDocumentToDb(container);
         }
-
-        console.log(TestPlugin.userOnForm);
     } 
     
-    constructor() {
-        this.manager();
+    async connectedCallback(){
+        super.connectedCallback();
+        await this.manager();
     }
     
     render() {
-        return html `<p>Dieser User arbeitet gerade auf dem Formular</p>`;
+        return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
     }
 }
 
