@@ -89,7 +89,6 @@ class TestPlugin extends LitElement {
     } 
     
     constructor() {
-        super();
         this.manager();
     }
     
