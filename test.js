@@ -1,4 +1,4 @@
-import cosmos from "@azure/cosmos";
+import cosmos from "./node_modules/@azure/cosmos";
 import config from './config.js';
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
@@ -60,8 +60,7 @@ export class TestPlugin extends LitElement {
         const { resource: createdDoc } = await container.items.create(newDocument);
     }
 
- 
-    async manager(idParam) {
+    async manager() {
         const{database, container, client, databaseId, containerId} = await this.init();
         const queryResults = await this.queryDatabase(database, container, client, databaseId, containerId);
 
@@ -83,9 +82,9 @@ export class TestPlugin extends LitElement {
         }
     } 
     
-    async connectedCallback(){
-        super.connectedCallback();
-        await this.manager();
+    constructor(){
+        super();
+        this.manager();
     }
     
     render() {
