@@ -1,90 +1,68 @@
-import cosmos from 'https://cdn.jsdelivr.net/npm/@azure/cosmos@3.17.3/dist/index.min.js';
-import config from './config.js';
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
 export class TestPlugin extends LitElement {
 
     static userOnForm = "No User";
-    static current_formId = 'abcd3';
-    static current_workflowid = 'abc4';
-    static current_user = 'aj';
 
-    async init() {
-        const CosmosClient = cosmos.CosmosClient;
-        const { cosmosDatabase: {masterKey, endpoint, databaseId, containerId}} = config;
-        const client = new CosmosClient({ endpoint, key: masterKey });
-        const { database } = await client.databases.createIfNotExists({ id: databaseId });
-        const { container } = await database.containers.createIfNotExists({ id: containerId });
-        return { database, container, client, databaseId, containerId};
-    }
+    static properties = {
+        apiKey: {type: String},
+        endpoint: {type: String},
+        databaseId: {type: String},
+        containerId: {type: String},
+        current_workflowid: {type: String},
+        current_formId: {type: String},
+        current_user: {type: String}
+    };
 
-    async queryDatabase(database, container, client, databaseId, containerId){
-
-        const querySpec = {
-            query: "SELECT * FROM c WHERE c.id = @id ",
-            parameters: [
-            { name: "@id", value: TestPlugin.current_workflowid }
-            ]
-        };
-
-        const { resources: results } = await client
-        .database(databaseId)
-        .container(containerId)
-        .items.query(querySpec)
-        .fetchAll()
-        
-        return results;
-    }
-
-    async addFormToCosmosDB(container, resources) {
-
-        const doc = resources[0];
-        const newForm = {
-        formID: TestPlugin.current_formId,
-        user: TestPlugin.current_user
-        };
-        doc.forms.push(newForm);
-        const { resource: updatedDoc } = await container.items.upsert(doc);
-    }
-
-    async  addDocumentToDb(container){
-        const newDocument = {
-        id: TestPlugin.current_workflowid,
-        forms: [
-            {
-            formID: TestPlugin.current_formId,
-            user: TestPlugin.current_user
-            }
-        ]
-        };
-        const { resource: createdDoc } = await container.items.create(newDocument);
-    }
-
-    async manager() {
-        const{database, container, client, databaseId, containerId} = await this.init();
-        const queryResults = await this.queryDatabase(database, container, client, databaseId, containerId);
-
-        if(queryResults.length > 0) {
-            const doc = queryResults[0];
-            const formExists = doc.forms.some(form => form.formID === TestPlugin.current_formId);
-
-            if(formExists){
-                queryResults[0].forms.forEach(form => {
-                    if (form.formID == TestPlugin.current_formId){
-                        TestPlugin.userOnForm = form.user;
-                    }
-                });
-            } else {
-                this.addFormToCosmosDB(container, queryResults);
-            }
-        } else {
-            this.addDocumentToDb(container);
-        }
-    } 
+    // return a promise for contract changes.
+  static getMetaConfig() {
+    return {
+      controlName: 'Usage Tracker',
+      fallbackDisableSubmit: false,
+      groupName: 'Useractivity',
+      version: '1.2',
+      properties: {
+        apiKey: {
+          type: 'string',
+          title: 'API Key',
+          description: 'Api key to database'
+        },       
+        endpoint: {
+          title: 'endpoint',
+          type: 'string'
+        },  
+        databaseId: {
+            title: 'databaseId',
+            type: 'string'
+        },
+        containerId: {
+            title: 'containerId',
+            type: 'string'
+        },
+        current_workflowid: {
+          title: 'workflowId',
+          type: 'string'
+        },
+        current_formId: {
+          title: 'formId',
+          type: 'string'
+        },
+        current_user: {
+          title: 'user',
+          type: 'string'
+        },
+        value: {
+          title: 'Aktueller Benutzer',
+          type: 'string',
+          isValueField: true, 
+        }            
+      },
+      events: ["ntx-value-change"],
+    };
+  }
     
     constructor(){
         super();
-        this.manager();
     }
     
     render() {
@@ -92,4 +70,6 @@ export class TestPlugin extends LitElement {
     }
 }
 
-customElements.define('test-plugin', TestPlugin);
+// registering the web component
+const elementName = 'dataone-tracker-plugin';
+customElements.define(elementName, TestPlugin);
