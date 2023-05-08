@@ -71,7 +71,7 @@ export class TestPlugin extends LitElement {
     }
     
     render() {
-        if(littleTest === 1){
+        if(TestPlugin.littleTest === 1){
             return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
         } else {
             this.test();
