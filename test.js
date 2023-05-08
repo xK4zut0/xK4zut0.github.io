@@ -3,6 +3,7 @@ import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-a
 export class TestPlugin extends LitElement {
 
     static userOnForm = "No User";
+    static littleTest = 0;
 
     static properties = {
         apiKey: {type: String},
@@ -60,13 +61,21 @@ export class TestPlugin extends LitElement {
       events: ["ntx-value-change"],
     };
   }
+
+  test(){
+    return html `<p>Test</p>`
+  }
     
     constructor(){
         super();
     }
     
     render() {
-        return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
+        if(littleTest === 1){
+            return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
+        } else {
+            this.test();
+        }
     }
 }
 
