@@ -64,7 +64,7 @@ export class TestPlugin extends LitElement {
 
     async init() {
         const CosmosClient = cosmos.CosmosClient;
-        const client = new CosmosClient({ endpoint: this.endpoint, key: this.masterKey });
+        const client = new CosmosClient({ endpoint: this.endpoint, key: this.apiKey });
         const { database } = await client.databases.createIfNotExists({ id: this.databaseId });
         const { container } = await database.containers.createIfNotExists({ id: this.containerId });
         return { database, container, client};
