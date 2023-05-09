@@ -57,7 +57,11 @@ export class TestPlugin extends LitElement {
   }
 
   async test(){
-    TestPlugin.userOnForm = "async works";
+    TestPlugin.userOnForm = await this.changeUser();
+  }
+
+  async changeUser(){
+    return "lul"
   }
     
     constructor(){
