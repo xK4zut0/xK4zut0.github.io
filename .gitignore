@@ -34,6 +34,7 @@ directHttpQuery.js
 final_test.js
 FormUsage.js
 tracker_final.js
+webpack.config.js
 
 # IDEs and editors
 .idea
