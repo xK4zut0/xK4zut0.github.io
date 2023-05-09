@@ -1,5 +1,4 @@
 import { html,LitElement} from 'lit'
-import cosmos, { CosmosClient } from "https://cdn.jsdelivr.net/npm/@azure/cosmos@4.3.0/dist/cosmos-browser.umd.min.js";
 
 export class TestPlugin extends LitElement {
 
@@ -57,19 +56,13 @@ export class TestPlugin extends LitElement {
     };
   }
 
-  async connectedCallback() {
-    const client = new CosmosClient({ endpoint: this.endpoint, masterkey:  this.apiKey });
-    const { database } = await client.databases.createIfNotExists({ id: this.databaseId });
-    const { container } = await database.containers.createIfNotExists({ id: this.containerId });
-    
-    if(container){
-      TestPlugin.userOnForm = "connected successfully";
-    }
+  async test(){
+    TestPlugin.userOnForm = "async works";
   }
     
     constructor(){
         super();
-        this.connectedCallback();
+        this.test();
     }
     
     render() {

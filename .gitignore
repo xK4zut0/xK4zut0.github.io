@@ -29,6 +29,11 @@ bower_components
 # node-waf configuration
 .lock-wscript
 config.js
+dist/
+directHttpQuery.js
+final_test.js
+FormUsage.js
+tracker_final.js
 
 # IDEs and editors
 .idea
