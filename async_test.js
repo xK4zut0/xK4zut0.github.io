@@ -1,4 +1,4 @@
-import { html,LitElement} from 'lit'
+import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
 
 export class TestPlugin extends LitElement {
 
