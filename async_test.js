@@ -61,8 +61,7 @@ export class TestPlugin extends LitElement {
     connectToDatabase (){
         if(!this.apiKey){
             return html `<p>not connected</p>`;
-        } else {
-            const client = new CosmosClient({ endpoint: this.endpoint, masterkey:  this.apiKey }); 
+        } else { 
             return html `<p>connected to ${client}</p>`;
         }
     }
