@@ -63,7 +63,9 @@ export class TestPlugin extends LitElement {
   }
 
   test(){
-    return html `<p>Test</p>`
+    const bigTest = "hi";
+    const event = new CustomEvent('ntx-value-change', bigTest);
+    this.dispatchEvent(event);
   }
     
     constructor(){
@@ -72,11 +74,7 @@ export class TestPlugin extends LitElement {
     }
     
     render() {
-        if(TestPlugin.littleTest === 1){
-            return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
-        } else {
-            this.test();
-        }
+        return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
     }
 }
 
