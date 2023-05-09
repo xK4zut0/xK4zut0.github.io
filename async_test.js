@@ -71,7 +71,7 @@ export class TestPlugin extends LitElement {
     }
     
     render() {
-        return html `<p>${TestPlugin.userOnForm}</p>`;
+        return html `${this.connectToDatabase()}`;
     }
 }
 
