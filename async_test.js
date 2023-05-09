@@ -5,7 +5,7 @@ export class TestPlugin extends LitElement {
 
     static userOnForm = "No User";
     static littleTest = 0;
-    static intervalId;
+    static intervalId = 0;
 
     static properties = {
         apiKey: {type: String},
@@ -58,7 +58,7 @@ export class TestPlugin extends LitElement {
     };
   }
 
-  updateInterval (){
+  async updateInterval (){
     this.intervalId = setInterval(async () => {
         this.connectToDatabase();
       }, 5000);
@@ -85,5 +85,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackerv3-plugin';
+const elementName = 'dataone-testing-plugin';
 customElements.define(elementName, TestPlugin);
