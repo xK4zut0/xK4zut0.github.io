@@ -86,7 +86,7 @@ export class TestPlugin extends LitElement {
     }
     
     render() {
-        return html `<p>Dieser User arbeitet gerade auf dem Formular ${this.current_user}</p>`;
+        return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}}</p>`;
     }
 }
 
