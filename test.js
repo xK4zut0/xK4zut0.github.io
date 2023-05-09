@@ -63,9 +63,7 @@ export class TestPlugin extends LitElement {
   }
 
   test(){
-    const bigTest = "hi";
-    const event = new CustomEvent('ntx-value-change', bigTest);
-    this.dispatchEvent(event);
+    TestPlugin.userOnForm = "aj"
   }
     
     constructor(){
