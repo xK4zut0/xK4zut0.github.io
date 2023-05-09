@@ -67,9 +67,9 @@ export class TestPlugin extends LitElement {
   async connectToDatabase (){
     if(!this.apiKey){
         TestPlugin.userOnForm = "cant connect" + this.littleTest;
-        littleTest ++;
+        this.littleTest ++;
     } else {
-        clearInterval(intervalId);
+        clearInterval(this.intervalId);
         TestPlugin.userOnForm = "tried to connect";
     }
 }
