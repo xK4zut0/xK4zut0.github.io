@@ -61,8 +61,7 @@ export class TestPlugin extends LitElement {
 
   async connectToDatabase (){
     if(!this.apiKey){
-        TestPlugin.userOnForm = "cant connect" + this.littleTest;
-        this.littleTest = this.littleTest++;
+        TestPlugin.userOnForm = "cant connect";
     } else {
         TestPlugin.userOnForm = "tried to connect";
     }
@@ -79,5 +78,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-testing-plugin';
+const elementName = 'dataone-testing1-plugin';
 customElements.define(elementName, TestPlugin);
