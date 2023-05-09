@@ -57,11 +57,11 @@ export class TestPlugin extends LitElement {
     };
   }
 
-    async connectToDatabase (){
+    connectToDatabase (){
         if(!this.apiKey){
             return html `<p>not connected</p>`;
         } else {
-            return html `<p>not connected</p>`;
+            return html `<p>connected</p>`;
         }
     }
     
