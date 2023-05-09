@@ -5,6 +5,7 @@ export class TestPlugin extends LitElement {
 
     static userOnForm = "No User";
     static littleTest = 0;
+    static intervalId;
 
     static properties = {
         apiKey: {type: String},
@@ -56,9 +57,32 @@ export class TestPlugin extends LitElement {
       }
     };
   }
+
+  updateInterval (){
+    this.intervalId = setInterval(async () => {
+        this.connectToDatabase();
+      }, 5000);
+  }
+
+  async connectToDatabase (){
+    if(!this.apiKey){
+        TestPlugin.userOnForm = "cant connect" + this.littleTest;
+        littleTest ++;
+    } else {
+        clearInterval(intervalId);
+        const client = new CosmosClient({ endpoint: this.endpoint, masterkey:  this.apiKey });
+        const { database } = await client.databases.createIfNotExists({ id: this.databaseId });
+        const { container } = await database.containers.createIfNotExists({ id: this.containerId });
+
+        if(container){
+            TestPlugin.userOnForm = "connected successfully";
+    }
+    }
+}
     
     constructor(){
         super();
+        this.updateInterval();
     }
     
     render() {
