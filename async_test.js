@@ -60,17 +60,6 @@ export class TestPlugin extends LitElement {
   async test(){
     TestPlugin.userOnForm = await this.changeUser();
   }
-  async connectedCallback() {
-    const client = new CosmosClient({ endpoint: this.endpoint, masterkey:  this.apiKey });
-    const { database } = await client.databases.createIfNotExists({ id: this.databaseId });
-    const { container } = await database.containers.createIfNotExists({ id: this.containerId });
-    
-    if(container){
-      TestPlugin.userOnForm = "connected successfully";
-    } else {
-        TestPlugin.userOnForm = "Not connected"; 
-    }
-  }
     
     constructor(){
         super();
