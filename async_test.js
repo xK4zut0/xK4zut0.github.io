@@ -4,6 +4,7 @@ export class TestPlugin extends LitElement {
 
     static userOnForm = "No User";
     static littleTest = 0;
+    static intervalId;
 
     static properties = {
         apiKey: {type: String},
@@ -56,11 +57,18 @@ export class TestPlugin extends LitElement {
     };
   }
 
+  async updateInterval (){
+    this.intervalId = setInterval(async () => {
+        this.connectToDatabase();
+    }, 5000);
+  }
+
   async connectToDatabase (){
     if(!this.apiKey){
         TestPlugin.userOnForm = "cant connect";
     } else {
         TestPlugin.userOnForm = "tried to connect";
+        clearInterval(this.intervalId);
     }
     }
     
