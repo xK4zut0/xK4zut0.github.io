@@ -61,14 +61,10 @@ export class TestPlugin extends LitElement {
         if(!this.apiKey){
             return html `<p>not connected</p>`;
         } else {
-            this.test();
+            return html `<p>connected</p>`;
         }
     }
 
-    async test(){
-        return html `<p>async method</p>`
-    }
-    
     constructor(){
         super();
         this.connectToDatabase();
