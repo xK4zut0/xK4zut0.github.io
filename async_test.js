@@ -70,13 +70,7 @@ export class TestPlugin extends LitElement {
         littleTest ++;
     } else {
         clearInterval(intervalId);
-        const client = new CosmosClient({ endpoint: this.endpoint, masterkey:  this.apiKey });
-        const { database } = await client.databases.createIfNotExists({ id: this.databaseId });
-        const { container } = await database.containers.createIfNotExists({ id: this.containerId });
-
-        if(container){
-            TestPlugin.userOnForm = "connected successfully";
-    }
+        TestPlugin.userOnForm = "tried to connect";
     }
 }
     
@@ -86,7 +80,7 @@ export class TestPlugin extends LitElement {
     }
     
     render() {
-        return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}}</p>`;
+        return html `<p>The current User ${TestPlugin.userOnForm} is working on the form</p>`;
     }
 }
 
