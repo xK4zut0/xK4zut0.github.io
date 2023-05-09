@@ -1,5 +1,4 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
-import cosmos, { CosmosClient } from "https://cdn.jsdelivr.net/npm/@azure/cosmos@4.3.0/dist/cosmos-browser.umd.min.js"
 
 export class TestPlugin extends LitElement {
 
@@ -65,7 +64,7 @@ export class TestPlugin extends LitElement {
     } else {
         TestPlugin.userOnForm = "tried to connect";
     }
-}
+    }
     
     constructor(){
         super();
