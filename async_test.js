@@ -55,20 +55,16 @@ export class TestPlugin extends LitElement {
       }
     };
   }
-
-  async test(){
-    TestPlugin.userOnForm = await this.changeUser();
-  }
     
     constructor(){
         super();
     }
     
     render() {
-        return html `<p>Dieser User arbeitet gerade auf dem Formular ${TestPlugin.userOnForm}</p>`;
+        return html `<p>Dieser User arbeitet gerade auf dem Formular ${this.current_user}</p>`;
     }
 }
 
 // registering the web component
-const elementName = 'dataone-tracker-plugin';
+const elementName = 'dataone-trackerv2-plugin';
 customElements.define(elementName, TestPlugin);
