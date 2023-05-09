@@ -58,25 +58,20 @@ export class TestPlugin extends LitElement {
     };
   }
 
-  async updateInterval (){
-    this.intervalId = setInterval(async () => {
-        this.connectToDatabase();
-      }, 5000);
-  }
+  
 
   async connectToDatabase (){
     if(!this.apiKey){
         TestPlugin.userOnForm = "cant connect" + this.littleTest;
         this.littleTest ++;
     } else {
-        clearInterval(this.intervalId);
         TestPlugin.userOnForm = "tried to connect";
     }
 }
     
     constructor(){
         super();
-        this.updateInterval();
+        this.connectToDatabase();
     }
     
     render() {
