@@ -51,14 +51,8 @@ export class TestPlugin extends LitElement {
         current_user: {
           title: 'user',
           type: 'string'
-        },
-        value: {
-          title: 'Aktueller Benutzer',
-          type: 'string',
-          isValueField: true, 
-        }            
-      },
-      events: ["ntx-value-change"],
+        }         
+      }
     };
   }
 
