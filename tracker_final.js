@@ -48,22 +48,26 @@ export class TestPlugin extends LitElement {
         current_user: {
           title: 'user',
           type: 'string'
-        },
-        value: {
-          title: 'Aktueller Benutzer',
-          type: 'string',
-          isValueField: true, 
         }            
       }
     };
   }
+
+  async test () {
+    return `<p>Dieser User arbeitet r</p>`; 
+  }
     
     constructor(){
         super();
+        this.test();
     }
     
     render() {
-        return html `<p>Dieser User arbeitet gerade auf dem Formular</p>`;
+      return html`       
+        
+        ${this.test()}
+     
+      `;  
     }
 }
 
