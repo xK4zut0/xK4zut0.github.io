@@ -94,7 +94,7 @@ export class TestPlugin extends LitElement {
 
     const result = this.encryptData(credentials, keyBuffer);
 
-    return html `Verschluesselte Daten ${result}`;
+    return "hi";
   }  
 
 
@@ -126,5 +126,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackingtestv6-plugin';
+const elementName = 'dataone-trackingtestv7-plugin';
 customElements.define(elementName, TestPlugin);
