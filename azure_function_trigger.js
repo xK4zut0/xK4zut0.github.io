@@ -4,7 +4,7 @@ import https from 'https'
 
 const {cosmosDatabase: {configMasterKey, configEndpoint, configDatabaseId, configContainerId}} = config
 
-const functionKey = "asdb123l8asjvnmfj!19239asdkkslad8asdl;k1238";
+const functionKey = "";
 const truncatedKey = Buffer.from(functionKey, 'utf8').slice(0, 32);
 
 
@@ -36,7 +36,7 @@ const options = {
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': postData.length,
-        'x-functions-key': '6hZ1MQ_7KVTytbzbD3Ve8RFp4mOzT0qNcXYShINPv4faAzFubI5kEA=='
+        'x-functions-key': 
     }
 };
 
