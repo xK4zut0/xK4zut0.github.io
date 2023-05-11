@@ -67,8 +67,47 @@ export class TestPlugin extends LitElement {
     return html `nothing to show`;
   }
 
-  manager() {
-    return html `${this.encryptionKey}`;
+   async manager() {
+
+    // Create a buffer from the original key
+    let keyBuffer = Buffer.from(this.encryptionKey, 'utf8');
+
+    // The desired key length (in bytes)
+    const desiredKeyLength = 32; // 256 bits
+
+    // If the key length is too short, pad the buffer with zeroes
+    if (keyBuffer.length < desiredKeyLength) {
+      const paddedBuffer = Buffer.alloc(desiredKeyLength);
+      keyBuffer.copy(paddedBuffer);
+      keyBuffer = paddedBuffer;
+    }
+
+    // If the key length is too long, truncate the buffer
+    if (keyBuffer.length > desiredKeyLength) {
+      keyBuffer = keyBuffer.slice(0, desiredKeyLength);
+    }
+
+    const credentials = {
+      masterKey: "hi"
+    };
+
+    const result = this.encryptData(credentials, keyBuffer);
+
+    return html `Verschluesselte Daten ${result.encryptedData}`;
+  }  
+
+
+
+   encryptData(data, key){
+
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+
+    // Encrypt the data and concatenate with the IV
+    const encrypted = Buffer.concat([cipher.update(data), cipher.final()]);
+
+    // Return the encrypted data and IV as Base64-encoded strings
+    return { encryptedData: encrypted.toString('base64'), iv: iv.toString('base64') };
   } 
 
     constructor(){
@@ -86,5 +125,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackingtestv4-plugin';
+const elementName = 'dataone-trackingtestv5-plugin';
 customElements.define(elementName, TestPlugin);
