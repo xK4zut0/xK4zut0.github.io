@@ -39,6 +39,7 @@ export class TestPlugin extends LitElement {
 
   test() {
     if(this.current_workflowid && this.current_formid && this.current_user){
+      this.fetchData();
       return html `${this.responseData}`;
     } else {
       return html `please enter the required information`;
