@@ -35,7 +35,6 @@ final_test.js
 FormUsage.js
 tracker_final.js
 webpack.config.js
-azure_function_trigger.js
 
 # IDEs and editors
 .idea
