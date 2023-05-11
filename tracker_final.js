@@ -1,6 +1,4 @@
 import { html,LitElement} from 'lit' //from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
-import crypto from 'crypto-browserify';
-import { Buffer } from 'buffer';
 
 export class TestPlugin extends LitElement {
 
