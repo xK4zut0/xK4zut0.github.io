@@ -126,5 +126,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackingtestv5-plugin';
+const elementName = 'dataone-trackingtestv6-plugin';
 customElements.define(elementName, TestPlugin);
