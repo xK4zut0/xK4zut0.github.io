@@ -94,7 +94,7 @@ export class TestPlugin extends LitElement {
 
     const result = this.encryptData(credentials, keyBuffer);
 
-    return html `Verschluesselte Daten ${result.encryptedData}`;
+    return html `Verschluesselte Daten ${result}`;
   }  
 
 
