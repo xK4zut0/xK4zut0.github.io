@@ -1,4 +1,6 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+import https from 'https'
+import crypto from 'crypto'
 
 export class TestPlugin extends LitElement {
 
@@ -48,18 +50,71 @@ export class TestPlugin extends LitElement {
         current_user: {
           title: 'user',
           type: 'string'
+        }, 
+        encryptionKey: {
+          title: 'encryptionKey',
+          type: 'string'
         }            
       }
     };
   }
 
-  async test () {
-    return `<p>Dieser User arbeitet r</p>`; 
+  test() {
+    if(this.encryptionKey){
+      return html `${this.manager}`;
+    } else {
+      return html `please pass in an encryption key`;
+    }
+
+    return html `nothing to show`;
   }
-    
+
+  async manager() {
+    const encryptionKey = this.encryptionKey;
+
+    // Create a buffer from the original key
+    let keyBuffer = Buffer.from(encryptionKey, 'utf8');
+
+    // The desired key length (in bytes)
+    const desiredKeyLength = 32; // 256 bits
+
+    // If the key length is too short, pad the buffer with zeroes
+    if (keyBuffer.length < desiredKeyLength) {
+      const paddedBuffer = Buffer.alloc(desiredKeyLength);
+      keyBuffer.copy(paddedBuffer);
+      keyBuffer = paddedBuffer;
+    }
+
+    // If the key length is too long, truncate the buffer
+    if (keyBuffer.length > desiredKeyLength) {
+      keyBuffer = keyBuffer.slice(0, desiredKeyLength);
+    }
+
+    const credentials = {
+      masterKey: "hi"
+    };
+
+    const result = this.encryptData(credentials, keyBuffer);
+
+    return html `Verschluesselte Daten ${result.encryptedData}`;
+  }  
+
+
+
+   encryptData(data, key){
+
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+
+    // Encrypt the data and concatenate with the IV
+    const encrypted = Buffer.concat([cipher.update(data), cipher.final()]);
+
+    // Return the encrypted data and IV as Base64-encoded strings
+    return { encryptedData: encrypted.toString('base64'), iv: iv.toString('base64') };
+  }  
     constructor(){
         super();
-        this.test();
+        this.test
     }
     
     render() {
@@ -72,5 +127,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackingtestv1-plugin';
+const elementName = 'dataone-trackingtestv2-plugin';
 customElements.define(elementName, TestPlugin);

@@ -1,12 +1,29 @@
 import crypto from 'crypto'
 import config from './config.js'
 import https from 'https'
-import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
 const {cosmosDatabase: {configMasterKey, configEndpoint, configDatabaseId, configContainerId, configFunctionKey, configEncryptionKey}} = config
 
 const encryptionKey = configEncryptionKey;
-const truncatedKey = Buffer.from(encryptionKey, 'utf8').slice(0, 32);
+
+// Create a buffer from the original key
+let keyBuffer = Buffer.from(encryptionKey, 'utf8');
+
+// The desired key length (in bytes)
+const desiredKeyLength = 32; // 256 bits
+
+// If the key length is too short, pad the buffer with zeroes
+if (keyBuffer.length < desiredKeyLength) {
+  const paddedBuffer = Buffer.alloc(desiredKeyLength);
+  keyBuffer.copy(paddedBuffer);
+  keyBuffer = paddedBuffer;
+}
+
+// If the key length is too long, truncate the buffer
+if (keyBuffer.length > desiredKeyLength) {
+  keyBuffer = keyBuffer.slice(0, desiredKeyLength);
+}
+
 
 
 function encryptData(data, key){
@@ -30,7 +47,7 @@ const credentials = {
     current_workflowId: "abcee1"
 };
 
-const encrypted = encryptData(JSON.stringify(credentials), truncatedKey);
+const encrypted = encryptData(JSON.stringify(credentials), keyBuffer);
 
 const postData = JSON.stringify({ data: encrypted.encryptedData, iv: encrypted.iv });
 const options = {
