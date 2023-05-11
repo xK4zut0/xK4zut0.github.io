@@ -1,6 +1,4 @@
-import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
-import https from 'https'
-import crypto from 'crypto'
+import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
 
 export class TestPlugin extends LitElement {
 
@@ -131,5 +129,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackingtestv2-plugin';
+const elementName = 'dataone-trackingtestv3-plugin';
 customElements.define(elementName, TestPlugin);
