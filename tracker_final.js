@@ -73,7 +73,7 @@ export class TestPlugin extends LitElement {
 
     constructor(){
         super();
-        this.test
+        this.test()
     }
     
     render() {
