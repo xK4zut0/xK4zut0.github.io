@@ -1,4 +1,5 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
+import crypto from 'crypto'
 
 export class TestPlugin extends LitElement {
 
