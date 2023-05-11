@@ -1,5 +1,6 @@
-import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
-import crypto from 'crypto'
+import { html,LitElement} from 'lit' //from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
+import crypto from 'crypto-browserify';
+import { Buffer } from 'buffer';
 
 export class TestPlugin extends LitElement {
 
@@ -10,7 +11,8 @@ export class TestPlugin extends LitElement {
         containerId: {type: String},
         current_workflowid: {type: String},
         current_formId: {type: String},
-        current_user: {type: String}
+        current_user: {type: String},
+        responseData: {type:String}
     };
 
     // return a promise for contract changes.
@@ -21,95 +23,59 @@ export class TestPlugin extends LitElement {
       groupName: 'Useractivity',
       version: '1.2',
       properties: {
-        apiKey: {
-          type: 'string',
-          title: 'API Key',
-          description: 'Api key to database'
-        },       
-        endpoint: {
-          title: 'endpoint',
-          type: 'string'
-        },  
-        databaseId: {
-            title: 'databaseId',
-            type: 'string'
-        },
-        containerId: {
-            title: 'containerId',
-            type: 'string'
-        },
         current_workflowid: {
           title: 'workflowId',
           type: 'string'
         },
-        current_formId: {
+        current_formid: {
           title: 'formId',
           type: 'string'
         },
         current_user: {
           title: 'user',
           type: 'string'
-        }, 
-        encryptionKey: {
-          title: 'encryptionKey',
-          type: 'string'
-        }            
+        }          
       }
     };
   }
 
   test() {
-    if(this.encryptionKey){
-      return html `${this.manager()}`;
+    if(this.current_workflowid && this.current_formid && this.current_user){
+      return html `${this.responseData}`;
     } else {
-      return html `please pass in an encryption key`;
+      return html `please enter the required information`;
     }
-
-    return html `nothing to show`;
   }
 
-   async manager() {
-
-    // Create a buffer from the original key
-    let keyBuffer = Buffer.from(this.encryptionKey, 'utf8');
-
-    // The desired key length (in bytes)
-    const desiredKeyLength = 32; // 256 bits
-
-    // If the key length is too short, pad the buffer with zeroes
-    if (keyBuffer.length < desiredKeyLength) {
-      const paddedBuffer = Buffer.alloc(desiredKeyLength);
-      keyBuffer.copy(paddedBuffer);
-      keyBuffer = paddedBuffer;
+  fetchData() {
+    const dataToSend = {
+      current_workflowId: this.current_workflowid,
+      current_formId: this.current_formid,
+      current_user: this.current_user
     }
 
-    // If the key length is too long, truncate the buffer
-    if (keyBuffer.length > desiredKeyLength) {
-      keyBuffer = keyBuffer.slice(0, desiredKeyLength);
-    }
-
-    const credentials = {
-      masterKey: "hi"
-    };
-
-    const result = this.encryptData(credentials, keyBuffer);
-
-    return "hi";
-  }  
-
-
-
-   encryptData(data, key){
-
-    const iv = crypto.randomBytes(16);
-    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
-
-    // Encrypt the data and concatenate with the IV
-    const encrypted = Buffer.concat([cipher.update(data), cipher.final()]);
-
-    // Return the encrypted data and IV as Base64-encoded strings
-    return { encryptedData: encrypted.toString('base64'), iv: iv.toString('base64') };
-  } 
+    fetch('https://querycosmos.azurewebsites.net/api/QueryFormsUserv2', {
+        method: 'POST',
+        body: JSON.stringify(dataToSend),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-functions-key': "sXpaDYLLQyviWvUvpsOMnJpvcRf0TK6h0lu6PLc-ZgXnAzFup0u2yA=="
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json(); // Parse the response data as JSON
+        } else {
+          throw new Error('Network response was not ok.');
+        }
+      })
+      .then(data => {
+        this.responseData = data;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 
     constructor(){
         super();
@@ -126,5 +92,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackingtestv7-plugin';
+const elementName = 'dataone-trackingtestv8-plugin';
 customElements.define(elementName, TestPlugin);
