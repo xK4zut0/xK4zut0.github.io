@@ -69,49 +69,53 @@ export class TestPlugin extends LitElement {
     return html `nothing to show`;
   }
 
-  async manager() {
-    const encryptionKey = this.encryptionKey;
+  manager() {
+    return html `${this.encryptionKey}`;
+  }
 
-    // Create a buffer from the original key
-    let keyBuffer = Buffer.from(encryptionKey, 'utf8');
+  // async manager() {
+  //   const encryptionKey = this.encryptionKey;
 
-    // The desired key length (in bytes)
-    const desiredKeyLength = 32; // 256 bits
+  //   // Create a buffer from the original key
+  //   let keyBuffer = Buffer.from(encryptionKey, 'utf8');
 
-    // If the key length is too short, pad the buffer with zeroes
-    if (keyBuffer.length < desiredKeyLength) {
-      const paddedBuffer = Buffer.alloc(desiredKeyLength);
-      keyBuffer.copy(paddedBuffer);
-      keyBuffer = paddedBuffer;
-    }
+  //   // The desired key length (in bytes)
+  //   const desiredKeyLength = 32; // 256 bits
 
-    // If the key length is too long, truncate the buffer
-    if (keyBuffer.length > desiredKeyLength) {
-      keyBuffer = keyBuffer.slice(0, desiredKeyLength);
-    }
+  //   // If the key length is too short, pad the buffer with zeroes
+  //   if (keyBuffer.length < desiredKeyLength) {
+  //     const paddedBuffer = Buffer.alloc(desiredKeyLength);
+  //     keyBuffer.copy(paddedBuffer);
+  //     keyBuffer = paddedBuffer;
+  //   }
 
-    const credentials = {
-      masterKey: "hi"
-    };
+  //   // If the key length is too long, truncate the buffer
+  //   if (keyBuffer.length > desiredKeyLength) {
+  //     keyBuffer = keyBuffer.slice(0, desiredKeyLength);
+  //   }
 
-    const result = this.encryptData(credentials, keyBuffer);
+  //   const credentials = {
+  //     masterKey: "hi"
+  //   };
 
-    return html `Verschluesselte Daten ${result.encryptedData}`;
-  }  
+  //   const result = this.encryptData(credentials, keyBuffer);
+
+  //   return html `Verschluesselte Daten ${result.encryptedData}`;
+  // }  
 
 
 
-   encryptData(data, key){
+  //  encryptData(data, key){
 
-    const iv = crypto.randomBytes(16);
-    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+  //   const iv = crypto.randomBytes(16);
+  //   const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
 
-    // Encrypt the data and concatenate with the IV
-    const encrypted = Buffer.concat([cipher.update(data), cipher.final()]);
+  //   // Encrypt the data and concatenate with the IV
+  //   const encrypted = Buffer.concat([cipher.update(data), cipher.final()]);
 
-    // Return the encrypted data and IV as Base64-encoded strings
-    return { encryptedData: encrypted.toString('base64'), iv: iv.toString('base64') };
-  }  
+  //   // Return the encrypted data and IV as Base64-encoded strings
+  //   return { encryptedData: encrypted.toString('base64'), iv: iv.toString('base64') };
+  // }  
     constructor(){
         super();
         this.test
