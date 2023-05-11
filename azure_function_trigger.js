@@ -1,11 +1,12 @@
 import crypto from 'crypto'
 import config from './config.js'
 import https from 'https'
+import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
-const {cosmosDatabase: {configMasterKey, configEndpoint, configDatabaseId, configContainerId}} = config
+const {cosmosDatabase: {configMasterKey, configEndpoint, configDatabaseId, configContainerId, configFunctionKey, configEncryptionKey}} = config
 
-const functionKey = "";
-const truncatedKey = Buffer.from(functionKey, 'utf8').slice(0, 32);
+const encryptionKey = configEncryptionKey;
+const truncatedKey = Buffer.from(encryptionKey, 'utf8').slice(0, 32);
 
 
 function encryptData(data, key){
@@ -23,7 +24,10 @@ const credentials = {
     masterKey: configMasterKey,
     endpoint: configEndpoint,
     databaseId: configDatabaseId,
-    containerId: configContainerId
+    containerId: configContainerId,
+    current_formId: "abcdee1",
+    current_user: "aj",
+    current_workflowId: "abcee1"
 };
 
 const encrypted = encryptData(JSON.stringify(credentials), truncatedKey);
@@ -36,7 +40,7 @@ const options = {
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': postData.length,
-        'x-functions-key': 
+        'x-functions-key': configFunctionKey
     }
 };
 
