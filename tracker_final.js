@@ -10,7 +10,8 @@ export class TestPlugin extends LitElement {
         current_workflowid: {type: String},
         current_formId: {type: String},
         current_user: {type: String},
-        responseData: {type:String}
+        responseData: {type: String},
+        function_key: {type: String}
     };
 
     // return a promise for contract changes.
@@ -31,6 +32,10 @@ export class TestPlugin extends LitElement {
         },
         current_user: {
           title: 'user',
+          type: 'string'
+        },
+        function_key: {
+          title: 'function Key',
           type: 'string'
         }          
       }
@@ -58,7 +63,7 @@ export class TestPlugin extends LitElement {
         body: JSON.stringify(dataToSend),
         headers: {
           'Content-Type': 'application/json',
-          'x-functions-key': "sXpaDYLLQyviWvUvpsOMnJpvcRf0TK6h0lu6PLc-ZgXnAzFup0u2yA=="
+          'x-functions-key': function_key
         }
       })
       .then(response => {
