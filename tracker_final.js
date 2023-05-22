@@ -10,7 +10,6 @@ export class TestPlugin extends LitElement {
         current_workflowid: {type: String},
         current_formId: {type: String},
         current_user: {type: String},
-        responseData: {type: String},
         function_key: {type: String}
     };
 
@@ -37,19 +36,20 @@ export class TestPlugin extends LitElement {
         function_key: {
           title: 'function Key',
           type: 'string'
-        }          
+        }      
       }
     };
   }
 
   test() {
-    if(this.current_workflowid && this.current_formid && this.current_user){
-      this.fetchData();
-      return html `${this.responseData}`;
+    if(this.current_workflowid && this.current_formid && this.current_user && this.function_key){
+      const tmp = this.fetchData();
+      return html `<p>Hi worked :) ${tmp}</p>`;
     } else {
       return html `please enter the required information`;
     }
   }
+  
 
   fetchData() {
     const dataToSend = {
@@ -63,18 +63,18 @@ export class TestPlugin extends LitElement {
         body: JSON.stringify(dataToSend),
         headers: {
           'Content-Type': 'application/json',
-          'x-functions-key': function_key
+          'x-functions-key': this.function_key
         }
       })
       .then(response => {
         if (response.ok) {
           return response.json(); // Parse the response data as JSON
         } else {
-          throw new Error('Network response was not ok.');
+          return "something went wrong"
         }
       })
       .then(data => {
-        this.responseData = data;
+        console.log("data");
       })
       .catch(error => {
         console.error('Error:', error);
