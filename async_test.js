@@ -1,5 +1,4 @@
 import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
-import cosmos, { CosmosClient } from "https://cdn.jsdelivr.net/npm/@azure/cosmos@3.17.3/dist/index.min.js"
 
 export class TestPlugin extends LitElement {
 
@@ -62,7 +61,6 @@ export class TestPlugin extends LitElement {
         if(!this.apiKey){
             return html `<p>not connected</p>`;
         } else {
-            const CosmosClient = cosmos.CosmosClient;
             return html `<p>connected</p>`;
         }
     }

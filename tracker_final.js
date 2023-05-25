@@ -1,15 +1,11 @@
-import { html,LitElement} from 'lit' //from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
+import { html,LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js'
 
 export class TestPlugin extends LitElement {
 
     static properties = {
-        apiKey: {type: String},
-        endpoint: {type: String},
-        databaseId: {type: String},
-        containerId: {type: String},
-        current_workflowid: {type: String},
-        current_formId: {type: String},
-        current_user: {type: String},
+        current_workflowId_field: {type: String},
+        current_formId_field: {type: String},
+        current_user_field: {type: String},
         function_key: {type: String}
     };
 
@@ -21,30 +17,29 @@ export class TestPlugin extends LitElement {
       groupName: 'Useractivity',
       version: '1.2',
       properties: {
-        current_workflowid: {
+        current_workflowId_field: {
           title: 'workflowId',
           type: 'string'
         },
-        current_formid: {
+        current_formId_field: {
           title: 'formId',
           type: 'string'
         },
-        current_user: {
+        current_user_field: {
           title: 'user',
           type: 'string'
         },
         function_key: {
-          title: 'function Key',
+          title: 'Funktions Key',
           type: 'string'
-        }      
+        }   
       }
     };
   }
 
   test() {
-    if(this.current_workflowid && this.current_formid && this.current_user && this.function_key){
-      const tmp = this.fetchData();
-      return html `<p>Hi worked :) ${tmp}</p>`;
+    if(this.current_workflowId_field && this.current_formId_field && this.current_user_field){
+      return html `${this.fetchData()}`;
     } else {
       return html `please enter the required information`;
     }
@@ -53,9 +48,9 @@ export class TestPlugin extends LitElement {
 
   fetchData() {
     const dataToSend = {
-      current_workflowId: this.current_workflowid,
-      current_formId: this.current_formid,
-      current_user: this.current_user
+      current_workflowId: this.current_workflowId_field,
+      current_formId: this.current_formId_field,
+      current_user: this.current_user_field
     }
 
     fetch('https://querycosmos.azurewebsites.net/api/QueryFormsUserv2', {
@@ -68,13 +63,13 @@ export class TestPlugin extends LitElement {
       })
       .then(response => {
         if (response.ok) {
-          return response.json(); // Parse the response data as JSON
+          return html `response was ok`;
         } else {
-          return "something went wrong"
+          return html `something went wrong with the response`;
         }
       })
       .then(data => {
-        console.log("data");
+        return html `there was data`;
       })
       .catch(error => {
         console.error('Error:', error);
@@ -96,5 +91,5 @@ export class TestPlugin extends LitElement {
 }
 
 // registering the web component
-const elementName = 'dataone-trackingtestv8-plugin';
+const elementName = 'dataone-trackingtestv22-plugin';
 customElements.define(elementName, TestPlugin);
